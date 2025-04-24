@@ -49,11 +49,15 @@ app.post("/orders", UserControl.authenticate, Orders.storeList);
 
 app.get("/orders", UserControl.authenticate, Orders.index);
 
-app.get("/order_picking", UserControl.authenticate, Picking.index);
+app.get("/picking", UserControl.authenticate, Picking.index);
 
-app.post("/update/:id", UserControl.authenticate, Orders.update);
+app.post("/picking", UserControl.authenticate, Picking.store);
 
-app.post("/update", UserControl.authenticate, Orders.updateList);
+app.patch("/picking", UserControl.authenticate, Picking.update);
+
+app.patch("/update/:id", UserControl.authenticate, Orders.update);
+
+app.patch("/update", UserControl.authenticate, Orders.updateList);
 //.................................................................................
 
 
