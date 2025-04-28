@@ -5,7 +5,13 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     host: process.env.DB_HOST,
     dialect: "mysql",
     port: process.env.DB_PORT,
-    logging: false, // Remover logs do console
+    logging: false, // Remover logs do console,
+    pool: {
+        max: 10,     // máximo de conexões simultâneas
+        min: 0,      // mínimo de conexões
+        acquire: 30000, // tempo máximo para tentar conectar antes de erro (ms)
+        idle: 10000   // tempo para desconectar conexões ociosas (ms)
+    }
 });
 const testConnection = async ()=>{
     try{

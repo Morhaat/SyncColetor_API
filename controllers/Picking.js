@@ -31,7 +31,7 @@ module.exports = {
                         {
                             model: Order,
                             where: { 
-                                status: 'aguardando_separacao',
+                                //status: 'aguardando_separacao',
                                 externalId: {[Op.in]:order_list.orders}
                             },
                             required: true, // INNER JOIN

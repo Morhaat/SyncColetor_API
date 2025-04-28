@@ -8,6 +8,7 @@ const Webhooks = require("./controllers/Webhooks");
 const UserControl = require("./controllers/UserControl");
 const Picking = require("./controllers/Picking");
 const cors = require('cors');
+const PreSend = require("./controllers/PreSend");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,13 +16,13 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-sequelize.sync({ alter: true }).then(() => {
-    console.log("Banco de dados sincronizado!");
-});
+// sequelize.sync({ alter: true }).then(() => {
+//     console.log("Banco de dados sincronizado!");
+// });
 app.use(cors({
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }))
 
@@ -58,6 +59,13 @@ app.patch("/picking", UserControl.authenticate, Picking.update);
 app.patch("/update/:id", UserControl.authenticate, Orders.update);
 
 app.patch("/update", UserControl.authenticate, Orders.updateList);
+
+app.get("/presend", UserControl.authenticate, PreSend.index);
+
+app.post("/presend", UserControl.authenticate, PreSend.store);
+
+app.patch("/presend", UserControl.authenticate, PreSend.update);
+
 //.................................................................................
 
 

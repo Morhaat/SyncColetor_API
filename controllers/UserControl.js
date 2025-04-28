@@ -28,13 +28,13 @@ module.exports = {
             nivel_acesso:dadoUsuario.nivel_acesso
         }
 
-        const token = jwt.sign({payload}, process.env.JWT_SECRET, {expiresIn:"1h"});
+        const token = jwt.sign({payload}, process.env.JWT_SECRET, {expiresIn:"2h"});
         res.cookie("token", token, {
             httpOnly: true,
             secure:true,
             sameSite:'none',
             path:'/',
-            maxAge:360000,
+            maxAge:7200000,
         }).status(200).json({
             status:true,
             data:payload,
